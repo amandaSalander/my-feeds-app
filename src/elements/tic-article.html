@@ -1,0 +1,77 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<!--
+A comment describing this element
+
+Example:
+
+    <my-elem></my-elem>
+
+Example:
+
+    <my-elem>
+      <h2>Hello my-elem</h2>
+    </my-elem>
+
+@demo demo/index.html
+-->
+
+<dom-module id="tic-article">
+	<template>
+		<style>
+			:host {
+				display: block;
+				margin-top: 10px;
+				margin-bottom: 10px;
+				margin-left: 20px;
+				margin-right: 20px;
+				width: 95%;
+			}
+			a{
+				text-decoration: none;
+				color: grey;
+			}
+			paper-card{
+				width: 100%;
+				background-color: var(--tic-article-background-color,#FFF);
+			}
+		</style>
+		<a href$="{{link}}">
+			<paper-card heading="[[title]]" image="" elevation="2" animated-shadow="false">
+			  <div class="card-content">
+			  	[[description]]
+			  </div>
+			  <div class="card-actions">
+			  	[[date]]
+			  </div>
+			</paper-card>
+		</a>
+	</template>
+	<script>
+		Polymer({
+			is: 'tic-article',
+			properties:{
+				title:{
+					type:String,
+					value:"Article title"
+				},
+				description:{
+					type:String,
+					value:"the article description put it here"
+				},
+				link:{
+					type:String,
+					value:"/view1"
+				},
+				date:{
+					type:String,
+					value:"22/07/2017"
+				},
+				image:{
+					type:String,
+					value:"../../images/favicon.ico"	
+				}
+			}
+		});
+	</script>
+</dom-module>

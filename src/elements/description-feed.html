@@ -1,0 +1,155 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/iron-media-query/iron-media-query.html">
+<!--
+A comment describing this element
+
+Example:
+
+    <my-elem></my-elem>
+
+Example:
+
+    <my-elem>
+      <h2>Hello my-elem</h2>
+    </my-elem>
+
+@demo demo/index.html
+-->
+
+<dom-module id="description-feed">
+	<template>
+		<style>
+			:host {
+				display: block;
+				margin-bottom: 40px;
+
+			}
+			paper-card{
+				background-color: var(--app-primary-dark-color);
+				width: 108%;
+				margin-left: -10px;
+				margin-top: -12px;
+				/*margin-right: -10px;*/
+				color: white;
+
+			}
+			paper-button{
+				background-color: #FFF;
+			}
+			a{
+				text-decoration: none;
+				color: black;
+			}
+			paper-card:hover {
+ 				box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22);
+			}
+			paper-fab{
+				display: inline;
+			}
+			paper-fab:last-child{
+				
+				/*margin-bottom: -40px;*/
+				/*margin-left: 100px;*/
+				
+			}
+			.link{
+			/*	display: inline;
+				margin-bottom: 0px;
+				margin-left: 100px;
+				position: relative;*/
+				position: absolute;
+			    top: 0;
+			    right: 0;
+			    margin-right: 70px;
+			    margin-top: 40px;
+			    margin-left: 10px;
+			    z-index: 180;
+			    padding-right: 10px;
+			}
+			.addRemove{
+				position: absolute;
+			    top: 0;
+			    right: 0;
+			    margin-left: -50px;
+			    margin-top: 10px;
+			    z-index: 180;
+			}
+			paper-fab{
+    			--paper-fab-background: var(--app-accent-color);
+    			margin-left: 10px;
+
+  			}
+  			.card-content{
+  				margin-top: 10px;
+  				margin-bottom: 10px;
+  			}
+  			label{
+  				margin-right: 200px; 
+  			}
+			#add{
+			     position: fixed;
+			     bottom: 0;
+			     right: 0;
+			     margin-right: 20px;
+			     margin-bottom: 20px;
+			     z-index: 180;
+			}
+		</style>
+		
+		<iron-media-query query="min-width: 640px" query-matches="{{largeScreen}}">
+		
+		</iron-media-query>
+
+
+		<template is="dom-if" if="{{largeScreen}}">	
+			<paper-card heading="{{feed.title}}" image="" elevation="1" animated-shadow="false">
+			  
+			  	<div class="card-content">
+					<label>{{feed.lastBuildDate}}</label>
+				    <a href$="{{feed.link}}">
+				    	<paper-fab class="link" icon="link" raised>lien</paper-fab>
+				    </a>
+				</div>
+				<template is="dom-if" if="{{viewDetail}}">
+				  <div class="card-actions">
+				  	<p>{{feed.description}}</p>
+				  </div>
+				</template>  
+			</paper-card>
+		</template>
+
+
+			<template is="dom-if" if="{{!viewDetail}}">
+				<paper-fab id="add" icon="add" raised on-tap="viewDetailTap"></paper-fab>
+			</template>
+			
+			<template is="dom-if" if="{{viewDetail}}">
+				<paper-fab id="add" icon="remove" raised on-tap="hideDetailTap"></paper-fab>
+			</template>		
+
+
+		
+
+	</template>
+	<script>
+		Polymer({
+			is: 'description-feed',
+			properties :{
+				feed:Object,
+				viewDetail:{
+					type:Boolean,
+					value:false
+				}
+			},
+			viewDetailTap:function (event) {
+				this.viewDetail=true;
+			},
+			hideDetailTap:function (event) {
+				this.viewDetail=false;
+			}
+		});
+	</script>
+</dom-module>
